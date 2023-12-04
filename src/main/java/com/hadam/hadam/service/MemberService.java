@@ -22,4 +22,12 @@ public class MemberService {
         return newMember.getId();
     }
 
+    @Transactional(readOnly = true)
+    public Long checkMemberExist(String identifier){
+        Member member = memberRepository.findByIdentifier(identifier);
+        return (member != null) ? member.getId() : 0L;
+    }
+
+
+
 }
