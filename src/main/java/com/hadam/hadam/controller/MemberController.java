@@ -28,6 +28,4 @@ public class MemberController {
                 .body(BaseResponse.of(SuccessCode.OK, memberService.checkMemberExist(identifier)));
     }
 
-
-
 }
