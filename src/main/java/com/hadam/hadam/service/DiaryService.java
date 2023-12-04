@@ -28,8 +28,12 @@ public class DiaryService {
     public void deleteDiary(Long diaryId){
         Diary diary = diaryRepository.findByIdOrThrow(diaryId);
         diaryRepository.delete(diary);
-        DiaryInfo diaryInfo = diary.getDiaryInfo();
+        DiaryInfo diaryInfo = getDiaryInfoByDiary(diary);
         diaryInfoRepository.delete(diaryInfo);
+    }
+
+    public DiaryInfo getDiaryInfoByDiary(Diary diary) {
+        return diaryInfoRepository.findDiaryInfoByDiary(diary);
     }
 
 }

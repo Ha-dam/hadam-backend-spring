@@ -34,8 +34,8 @@ public class DiaryInfo extends BaseTimeEntity {
 
     private String experience;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @OneToOne
+    @JoinColumn(name = "diary_id")
+    private Diary diary;
 
 }

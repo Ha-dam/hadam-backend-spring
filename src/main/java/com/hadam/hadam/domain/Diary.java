@@ -16,15 +16,15 @@ public class Diary extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "diaryInfo_id")
-    private DiaryInfo diaryInfo;
-
     @Column(columnDefinition = "TEXT")
     private String img;
 
     @Column(columnDefinition = "TEXT")
     private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     public void setDiaryContent(String content){
         this.content = content;
