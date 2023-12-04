@@ -36,4 +36,6 @@ public class DiaryService {
         return diaryInfoRepository.findDiaryInfoByDiary(diary);
     }
 
+
+
 }

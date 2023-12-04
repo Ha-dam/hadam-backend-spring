@@ -23,13 +23,17 @@ public class DiaryController {
     }
 
     @DeleteMapping("/{diaryId}")
-    public ResponseEntity<BaseResponse> deleteDiary(@PathVariable Long diaryId){
+    public ResponseEntity<BaseResponse<?>> deleteDiary(@PathVariable Long diaryId){
         diaryService.deleteDiary(diaryId);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(BaseResponse.of(SuccessCode.OK, "일기 삭제에 성공하였습니다."));
+                .body(BaseResponse.of(SuccessCode.OK));
     }
 
-
-
+//    @PatchMapping("/{diaryId}/likes")
+//    public ResponseEntity<BaseResponse<?>> updateIsLiked(@PathVariable Long diaryId){
+//        diaryService.updateIsLiked(diaryId);
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(BaseResponse.of(SuccessCode.OK, "좋아요 취소 성공하였습니다."));
+//    }
 
 }
