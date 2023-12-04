@@ -19,7 +19,7 @@ public class MemberController {
     @PostMapping("/new")
     public ResponseEntity<BaseResponse<?>> createMember(@RequestBody CreateMemberReq createMemberReq){
         return ResponseEntity.status(HttpStatus.OK)
-                .body(BaseResponse.of(SuccessCode.OK, memberService.createMember(createMemberReq)));
+                .body(BaseResponse.of(SuccessCode.CREATED, memberService.createMember(createMemberReq)));
     }
 
     @GetMapping("/check")
