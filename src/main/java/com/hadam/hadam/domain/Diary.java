@@ -26,4 +26,8 @@ public class Diary extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    public void setDiaryContent(String content){
+        this.content = content;
+    }
+
 }
