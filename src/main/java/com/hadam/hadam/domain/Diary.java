@@ -22,6 +22,8 @@ public class Diary extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")
     private String content;
 
+    private boolean isLiked;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
