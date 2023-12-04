@@ -29,11 +29,11 @@ public class DiaryController {
                 .body(BaseResponse.of(SuccessCode.OK));
     }
 
-//    @PatchMapping("/{diaryId}/likes")
-//    public ResponseEntity<BaseResponse<?>> updateIsLiked(@PathVariable Long diaryId){
-//        diaryService.updateIsLiked(diaryId);
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body(BaseResponse.of(SuccessCode.OK, "좋아요 취소 성공하였습니다."));
-//    }
+    @PatchMapping("/{diaryId}/likes")
+    public ResponseEntity<BaseResponse<?>> updateIsLiked(@PathVariable Long diaryId){
+        diaryService.updateIsLiked(diaryId);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(BaseResponse.of(SuccessCode.OK));
+    }
 
 }

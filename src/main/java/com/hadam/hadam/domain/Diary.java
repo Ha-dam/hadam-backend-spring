@@ -32,4 +32,8 @@ public class Diary extends BaseTimeEntity {
         this.content = content;
     }
 
+    public void setIsLiked(boolean isLiked){
+        this.isLiked = isLiked;
+    }
+
 }

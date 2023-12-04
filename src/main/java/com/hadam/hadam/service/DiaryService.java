@@ -36,6 +36,13 @@ public class DiaryService {
         return diaryInfoRepository.findDiaryInfoByDiary(diary);
     }
 
+    @Transactional
+    public void updateIsLiked(Long diaryId){
+        Diary diary = diaryRepository.findByIdOrThrow(diaryId);
+        diary.setIsLiked(!diary.isLiked());
+        diaryRepository.save(diary);
+    }
+
 
 
 }
