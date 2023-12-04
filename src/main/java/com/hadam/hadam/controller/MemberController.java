@@ -7,10 +7,7 @@ import com.hadam.hadam.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,6 +22,11 @@ public class MemberController {
                 .body(BaseResponse.of(SuccessCode.OK, memberService.createMember(createMemberReq)));
     }
 
+    @GetMapping("/check")
+    public ResponseEntity<BaseResponse<?>> checkMemberExist(@RequestParam String identifier){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(BaseResponse.of(SuccessCode.OK, memberService.checkMemberExist(identifier)));
+    }
 
 
 
