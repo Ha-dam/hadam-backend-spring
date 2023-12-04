@@ -20,4 +20,11 @@ public class BaseResponse<T> {
                 .data(data)
                 .build();
     }
+
+    public static BaseResponse of(SuccessCode successCode){
+        return BaseResponse.builder()
+                .status(successCode.getHttpStatus().value())
+                .message(successCode.getMessage())
+                .build();
+    }
 }

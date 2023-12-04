@@ -22,5 +22,14 @@ public class DiaryController {
                 .body(BaseResponse.of(SuccessCode.OK, diaryService.updateDiary(diaryId, updateDiaryReq)));
     }
 
+    @DeleteMapping("/{diaryId}")
+    public ResponseEntity<BaseResponse> deleteDiary(@PathVariable Long diaryId){
+        diaryService.deleteDiary(diaryId);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(BaseResponse.of(SuccessCode.OK, "일기 삭제에 성공하였습니다."));
+    }
+
+
+
 
 }
