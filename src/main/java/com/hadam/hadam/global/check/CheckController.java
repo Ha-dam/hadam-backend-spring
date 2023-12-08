@@ -8,7 +8,7 @@ public class CheckController {
 
     @GetMapping("/api/check")
     public String check() {
-        return "Ok!";
+        return "Hadam Ok!";
     }
 
 }
