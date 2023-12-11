@@ -60,7 +60,7 @@ public class DiaryService {
         );
 
         if (diaries.isEmpty()) {
-            return null;
+            throw new EntityNotFoundException(ErrorCode.MONTHLY_NOT_FOUND);
         }
 
         // 랜덤으로 선택
