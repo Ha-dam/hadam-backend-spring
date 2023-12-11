@@ -141,5 +141,24 @@ public class DiaryService {
         );
     }
 
+    @Transactional(readOnly = true)
+    public List<MonthlyListReq> getSearchDiary(String keyword, Long memberId, int year, int month){
+
+        List<Diary> diaries = diaryRepository.findDiariesByMemberIdAndYearMonth(
+                memberId,
+                year,
+                month
+        );
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d");
+        return diaries.stream()
+                .filter(diary -> diary.getTitle().contains(keyword))
+                .map(diary -> new MonthlyListReq(
+                        diary.getId(),
+                        diary.getImg(),
+                        truncateContent(diary.getTitle()), // truncateContent 메서드 사용
+                        diary.getDate().format(formatter)
+                ))
+                .collect(Collectors.toList());
+    }
 
 }
