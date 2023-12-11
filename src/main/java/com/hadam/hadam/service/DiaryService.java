@@ -94,7 +94,7 @@ public class DiaryService {
                 .map(diary -> new MonthlyListReq(
                         diary.getId(),
                         diary.getImg(),
-                        truncateContent(diary.getContent()),  // truncateContent 메서드 사용
+                        truncateContent(diary.getTitle()),  // truncateContent 메서드 사용
                         diary.getDate().format(formatter)
                 ))
                 .sorted(Comparator.comparing(MonthlyListReq::date).reversed())
@@ -114,7 +114,7 @@ public class DiaryService {
                 .map(diary -> new MonthlyListReq(
                         diary.getId(),
                         diary.getImg(),
-                        truncateContent(diary.getContent()),  // truncateContent 메서드 사용
+                        truncateContent(diary.getTitle()),  // truncateContent 메서드 사용
                         diary.getDate().format(formatter)
                 ))
                 .sorted(Comparator.comparing(MonthlyListReq::date))
