@@ -4,6 +4,7 @@ import com.hadam.hadam.domain.Diary;
 import com.hadam.hadam.domain.DiaryInfo;
 import com.hadam.hadam.domain.Member;
 import com.hadam.hadam.dto.request.UpdateDiaryReq;
+import com.hadam.hadam.dto.response.DiaryDetailRes;
 import com.hadam.hadam.dto.response.MonthlyListReq;
 import com.hadam.hadam.dto.response.MonthlyRepresentRes;
 import com.hadam.hadam.global.error.exception.EntityNotFoundException;
@@ -16,9 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.stream.Collectors;
 import java.util.Comparator;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
@@ -121,13 +119,26 @@ public class DiaryService {
                 .collect(Collectors.toList());
     }
 
-    // TODO : 제목 넣을지에 따라 수정
     private String truncateContent(String content) {
         int maxLength = 15;
         if (content.length() > maxLength) {
             return content.substring(0, maxLength) + "...";
         }
         return content;
+    }
+
+    @Transactional(readOnly = true)
+    public DiaryDetailRes getDetailDiary(Long diaryId){
+        Diary diary = diaryRepository.findByIdOrThrow(diaryId);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy. MM. dd. HH:mm");
+        return new DiaryDetailRes(
+                diary.getId(),
+                diary.getImg(),
+                diary.getTitle(),
+                diary.getDate().format(formatter),
+                diary.getContent(),
+                diary.isLiked()
+        );
     }
 
 
