@@ -23,6 +23,8 @@ public class Diary extends BaseTimeEntity {
     @Column(columnDefinition = "LONGTEXT")
     private String img;
 
+    private String title;
+
     @Column(columnDefinition = "TEXT")
     private String content;
 
