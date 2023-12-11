@@ -42,4 +42,16 @@ public class DiaryController {
                 .body(BaseResponse.of(SuccessCode.OK, diaryService.getMonthlyDiary(memberId, year, month)));
     }
 
+    @GetMapping("/monthly/new")
+    public ResponseEntity<BaseResponse<?>> getMonthlyAllDiaryNew(@RequestParam Long memberId, @RequestParam int year, @RequestParam int month){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(BaseResponse.of(SuccessCode.OK, diaryService.getMonthlyAllDiaryNew(memberId, year, month)));
+    }
+
+    @GetMapping("/monthly/old")
+    public ResponseEntity<BaseResponse<?>> getMonthlyAllDiaryOld(@RequestParam Long memberId, @RequestParam int year, @RequestParam int month){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(BaseResponse.of(SuccessCode.OK, diaryService.getMonthlyAllDiaryOld(memberId, year, month)));
+    }
+
 }
