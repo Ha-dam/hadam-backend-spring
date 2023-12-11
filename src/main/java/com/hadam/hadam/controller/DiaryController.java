@@ -36,4 +36,10 @@ public class DiaryController {
                 .body(BaseResponse.of(SuccessCode.OK));
     }
 
+    @GetMapping("/monthly")
+    public ResponseEntity<BaseResponse<?>> getMonthlyDiary(@RequestParam Long memberId, @RequestParam int year, @RequestParam int month){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(BaseResponse.of(SuccessCode.OK, diaryService.getMonthlyDiary(memberId, year, month)));
+    }
+
 }
