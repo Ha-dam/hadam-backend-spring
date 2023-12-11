@@ -4,6 +4,7 @@ import com.hadam.hadam.domain.Diary;
 import com.hadam.hadam.domain.DiaryInfo;
 import com.hadam.hadam.domain.Member;
 import com.hadam.hadam.dto.request.UpdateDiaryReq;
+import com.hadam.hadam.dto.response.MonthlyListReq;
 import com.hadam.hadam.dto.response.MonthlyRepresentRes;
 import com.hadam.hadam.global.error.exception.EntityNotFoundException;
 import com.hadam.hadam.global.error.exception.ErrorCode;
@@ -12,6 +13,8 @@ import com.hadam.hadam.repository.DiaryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.stream.Collectors;
+import java.util.Comparator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -78,6 +81,54 @@ public class DiaryService {
         return year + " " + month + "월";
     }
 
+    @Transactional(readOnly = true)
+    public List<MonthlyListReq> getMonthlyAllDiaryNew(Long memberId, int year, int month) {
+        List<Diary> diaries = diaryRepository.findDiariesByMemberIdAndYearMonth(
+                memberId,
+                year,
+                month
+        );
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d");
+
+        return diaries.stream()
+                .map(diary -> new MonthlyListReq(
+                        diary.getId(),
+                        diary.getImg(),
+                        truncateContent(diary.getContent()),  // truncateContent 메서드 사용
+                        diary.getDate().format(formatter)
+                ))
+                .sorted(Comparator.comparing(MonthlyListReq::date).reversed())
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<MonthlyListReq> getMonthlyAllDiaryOld(Long memberId, int year, int month) {
+        List<Diary> diaries = diaryRepository.findDiariesByMemberIdAndYearMonth(
+                memberId,
+                year,
+                month
+        );
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d");
+
+        return diaries.stream()
+                .map(diary -> new MonthlyListReq(
+                        diary.getId(),
+                        diary.getImg(),
+                        truncateContent(diary.getContent()),  // truncateContent 메서드 사용
+                        diary.getDate().format(formatter)
+                ))
+                .sorted(Comparator.comparing(MonthlyListReq::date))
+                .collect(Collectors.toList());
+    }
+
+    // TODO : 제목 넣을지에 따라 수정
+    private String truncateContent(String content) {
+        int maxLength = 15;
+        if (content.length() > maxLength) {
+            return content.substring(0, maxLength) + "...";
+        }
+        return content;
+    }
 
 
 }
