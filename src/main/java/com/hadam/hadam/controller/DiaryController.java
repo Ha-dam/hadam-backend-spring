@@ -54,4 +54,10 @@ public class DiaryController {
                 .body(BaseResponse.of(SuccessCode.OK, diaryService.getMonthlyAllDiaryOld(memberId, year, month)));
     }
 
+    @GetMapping("/detail/{diaryId}")
+    public ResponseEntity<BaseResponse<?>> detailDiary(@PathVariable Long diaryId){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(BaseResponse.of(SuccessCode.OK, diaryService.getDetailDiary(diaryId)));
+    }
+
 }
