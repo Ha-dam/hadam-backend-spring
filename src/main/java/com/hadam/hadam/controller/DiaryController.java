@@ -60,4 +60,10 @@ public class DiaryController {
                 .body(BaseResponse.of(SuccessCode.OK, diaryService.getDetailDiary(diaryId)));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<BaseResponse<?>> searchDiary(@RequestParam String keyword, @RequestParam Long memberId, @RequestParam int year, @RequestParam int month){
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(BaseResponse.of(SuccessCode.OK, diaryService.getSearchDiary(keyword, memberId, year, month)));
+    }
+
 }
